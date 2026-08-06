@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Program{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2>Add New Program</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button class="btn btn-success">
+Save Program
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}

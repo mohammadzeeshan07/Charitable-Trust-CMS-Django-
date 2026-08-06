@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Programs{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Our Programs</h2>
+
+<form method="GET" class="mb-4">
+    <div class="input-group">
+        <input type="text"
+               name="search"
+               class="form-control"
+               placeholder="Search Program..."
+               value="{{ search }}">
+        <button class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<div class="row">
+
+{% for program in page_obj %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card shadow h-100">
+
+<img src="{{ program.image.url }}"
+     class="card-img-top"
+     style="height:220px;object-fit:cover;">
+
+<div class="card-body">
+
+<h5>{{ program.title }}</h5>
+
+<p>{{ program.description|truncatewords:20 }}</p>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<p>No Programs Found.</p>
+
+{% endfor %}
+
+</div>
+
+<nav>
+<ul class="pagination justify-content-center">
+
+{% if page_obj.has_previous %}
+<li class="page-item">
+<a class="page-link"
+href="?page={{ page_obj.previous_page_number }}&search={{ search }}">
+Previous
+</a>
+</li>
+{% endif %}
+
+<li class="page-item active">
+<span class="page-link">
+{{ page_obj.number }}
+</span>
+</li>
+
+{% if page_obj.has_next %}
+<li class="page-item">
+<a class="page-link"
+href="?page={{ page_obj.next_page_number }}&search={{ search }}">
+Next
+</a>
+</li>
+{% endif %}
+
+</ul>
+</nav>
+
+{% endblock %}
